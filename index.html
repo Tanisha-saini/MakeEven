@@ -6,89 +6,34 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>MAKE EVEN</title>
         
+        <!-- CSS -->
         <link rel="stylesheet" href="style.css" />
-        <script type="module" src="firebase/config.js"></script>
-        
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-            crossorigin="anonymous"
-        />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-        <script  src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"
-        ></script>
 
+        <script type="module" src="firebase/config.js"></script>
         <script type="module" src="firebase/login-logout-btn.js"></script>
        
     </head>
 
     <body>
         <!-- ....................................................NAVBAR...................................... -->
-        <div class="header">
-            <button
-                class="navbar-toggler ham_button"
-                type="button"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar"
-            >
-                <img src="assets/ham.png" />
-            </button>
-            <div
-                class="offcanvas offcanvas-start"
-                tabindex="-1"
-                id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel"
-            >
-                <div class="offcanvas-header">
-                    <img class="side_logo" src="assets/logo.png" />
-                    <button
-                        type="button"
-                        class="btn-close text-reset closebutton"
-                        data-bs-dismiss="offcanvas"
-                        aria-label="Close"
-                    ></button>
+        <nav class="navbar">
+            <div class="navbar-container container">
+                <input type="checkbox" name="" id="">
+                <div class="hamburger-lines">
+                    <span class="line line1"></span>
+                    <span class="line line2"></span>
+                    <span class="line line3"></span>
                 </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <a
-                                class="nav-link active side-icon"
-                                aria-current="page"
-                                href="index.html"
-                                >Home</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link side-icon" href="">Search</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link side-icon" href="">Connect</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link side-icon" href="">Forum</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div id="navbar">
-                <div class="logo"><img src="assets/logo.png" /></div>
-                <div class="navitems">
-                    <div class="links">
-                        <span><a href="index.html">Home</a></span>
-                        <span><a href="">Search</a></span>
-                        <span><a href="">Connect</a></span>
-                        <span><a href="">Forum</a></span>
-                    </div>
+                <ul class="menu-items">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Search</a></li>
+                    <li><a href="#">Chat</a></li>
+                    <li><a href="#">Forum</a></li>
                     <span class="login_button_container"
                         ><button
                             class="Login_button"
                             onclick="location.href='login.html' "
-                            id="Login_button"
-                        >
+                            id="Login_button">
                             Login
                         </button></span
                     >
@@ -97,19 +42,23 @@
                             LogOut
                         </button>
                     </span>
-                </div>
+                </ul>
+                <img class="logo" style="height:3rem;" src="assets/logo.png">
             </div>
-        </div>
-        <!-- .............................................................NAVBAR ENDS........................................... -->
+        </nav>
+
+        
         <header>
             <div id="head-left">
-                <h1>Lets Make it Even!</h1>
+                <h1>Lets</h1> 
+                <h1>Make it</h1>
+                <h1>Even!</h1>
                 <p>A platform to connect elderly with young generation.</p>
                 <div id="head-img-wrap">
                     <img src="assets/old-person.png" />
                     <img src="assets/young-person.png" />
                 </div>
-                <button id="start-btn">Get started</button>
+                <button onclick="window.location.href='signup.html'" id="start-btn">Get started</button>
             </div>
             <div id="head-right">
                 <img src="assets/head-img.png" />
@@ -145,48 +94,65 @@
         </section>
 
         <section id="section2">
-            <h2>You can use this application if you are</h2>
-            <div id="section2-inner-wrapper">
-                <div id="section2-inner">
-                    <img src="assets/young-person.png" />
+            <h2>Who can use it? </h2>
+            <div id="section2-inside">
+                <div class="rectangle">
+                    <img class="circle" src="assets/young-person.png">
                     <h3>Young</h3>
                     <p>Talk and learn from experience your elders have had</p>
+                    <!-- </div> -->
                 </div>
-                <div id="section2-inner">
-                    <img src="assets/old-person.png" />
+                <div class="rectangle">
+                    <img class="circle" src="assets/old-person.png">
                     <h3>Old</h3>
-                    <p>
-                        Learn trending stuffs from the trendsetters themselves.
-                    </p>
+                    <p> Learn trending stuffs from the trendsetters themselves.</p>
+                    <!-- </div> -->
                 </div>
             </div>
         </section>
 
         <section id="section3">
-            <h2>Key Features</h2>
+            <h1>Key features</h1>
             <div id="features-wrapper">
+                <img id="feature-hero-img" src="assets/generation_gap.jpg">
                 <div id="feature">
-                    <img src="assets/cup 1.png" />
-                    <h5>Find people you don’t see</h5>
-                </div>
-                <div id="feature">
-                    <img src="assets/cup 1.png" />
-                    <h5>Connect, Chat, learn</h5>
-                </div>
-                <div id="feature">
-                    <img src="assets/cup 1.png" />
-                    <h5>Ask and answer questions</h5>
-                </div>
-                <div id="feature">
-                    <img src="assets/cup 1.png" />
-                    <h5>Best user experience</h5>
-                </div>
-                <div id="feature">
-                    <img src="assets/cup 1.png" />
-                    <h5>Best user experience</h5>
+                    <ul>
+                        <li>
+                            <img id="feature-icon"src="assets/cup 1.png">
+                            <div id="feature-description">
+                                <h3>Find people</h3>
+                                <p>Find more people like you, people you find interesting, get along,chill around</p>
+                            </div>
+                        </li>
+                        <hr>
+                        <li>
+                            <img id="feature-icon" src="assets/cup 1.png">
+                            <div id="feature-description">
+                                <h3>Find people</h3>
+                                <p >Find more people like you, people you find interesting, get along,chill around</p>
+                            </div>
+                        </li>
+                        <hr>
+                        <li>
+                            <img id="feature-icon" src="assets/cup 1.png">
+                            <div id="feature-description">
+                                <h3>Find people</h3>
+                                <p>Find more people like you, people you find interesting, get along,chill around</p>
+                            </div>
+                        </li>
+                        <hr>
+                        <li>
+                            <img id="feature-icon" src="assets/cup 1.png">
+                            <div id="feature-description">
+                                <h3>Find people</h3>
+                                <p>Find more people like you, people you find interesting, get along,chill around</p>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
+
 
         <section id="section4">
             <h2>How it happens?</h2>
@@ -206,10 +172,13 @@
                     <h3>Build relations</h3>
                 </div>
             </div>
+            <button onclick="window.location.href='signup.html'">Get started</button>
         </section>
 
         <footer>
             <h3>© 2023 Make-even | All rights reserved</h3>
         </footer>
+
+        
     </body>
 </html>
