@@ -109,11 +109,21 @@ body {
     border: 0.2rem solid black;
 }
 
-#Logout_button {
+#profile-button {
     display: none;
-    background-color: rgb(236, 80, 80);
+    background-color: var(--bg-color);
     color: white;
+    border-radius: 0.5rem;
+
 }
+
+#profile-button img{
+    height:2rem;
+    width:2rem;
+    padding: 0.2rem;
+    cursor: pointer;
+}
+
 
 /*...........................................................LOGIN PAGE ..........................................................*/
 .login-wrapper {
@@ -223,6 +233,9 @@ body {
 }
 
 #loginwithfb{
+    display: flex;
+    align-items:center;
+    justify-content: center;
     border: 0.1rem solid #3b5998;
     border-radius: 1rem;
     padding: 0.5rem 0.8rem;
@@ -231,12 +244,14 @@ body {
 }
 
 #loginwithgo{
+    display: flex;
+    align-items:center;
+    justify-content: center;
     border: 0.1rem solid #DB4437;
     border-radius: 1rem;
     padding: 0.5rem 0.8rem;
     margin-top:1rem;
     width:16rem;
-
 }
 
 #loginwithfb:hover{
@@ -254,6 +269,7 @@ body {
 
 #loginwithfb img, #loginwithgo img{
     height: 1.8rem;
+    margin-left: 0.8rem;
 }
 
 /*.......................................................signup page.......................................................*/

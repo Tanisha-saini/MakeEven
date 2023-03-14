@@ -1,5 +1,4 @@
-import {auth,app,onAuthStateChanged,signInWithEmailAndPassword} from './config.js';
-import { GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+import {auth,app,onAuthStateChanged,signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from './config.js';
 //............................REFERENCES............................//
 const email = document.getElementById("login_email");
 const pswrd = document.getElementById("login_password");
@@ -20,6 +19,7 @@ function LoginUser() {
             })
             alert('user logged in');
             // ...
+            
         })
         .catch((error) => {
             const errorCode = error.code;

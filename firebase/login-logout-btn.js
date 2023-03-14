@@ -1,6 +1,7 @@
-import {auth,onAuthStateChanged, signOut} from './config.js'
+import {auth,onAuthStateChanged,database, doc,collection,query,where,getDocs} from './config.js';
 
-const logoutBtn = document.getElementById('Logout_button');
+
+const profileBtn = document.getElementById('profile-button');
 const loginBtn = document.getElementById('Login_button');
 
 //.......................................get current user.........................................//
@@ -8,35 +9,24 @@ const loginBtn = document.getElementById('Login_button');
 const user = auth.currentUser;
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        console.log(user);
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
-        logoutBtn.style.display = 'block';
+        const q = query(collection(database, "users"), where("uid", "==", user.uid));
+        getDocs(q)
+        .then((querySnapshot) => {
+            querySnapshot.forEach((docdata) => {
+                const docRef = doc(database, "users", docdata.id);
+                const img = document.getElementById('profile-picture');
+                img.src=docdata.data().profilephotourl;
+            })
+        });
         loginBtn.style.display = 'none';
+        profileBtn.style.display='block';
         // ...
     } 
     else {
         // User is signed out
         // ...
         loginBtn.style.display = 'block';
-        logoutBtn.style.display = 'none';
+        profileBtn.style.display = 'none';
     }
 });
-
-//........................................log out...................................................//
-function logout() {
-    signOut(auth).then(() => {
-        // Sign-out successful.
-        alert("user logged out");
-        // M.toast({html: 'I am a toast!',displayLength: 500})
-    }).catch((error) => {
-        // An error happened.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage);
-
-    });
-}
-
-logoutBtn.addEventListener("click", logout);

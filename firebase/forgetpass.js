@@ -1,5 +1,4 @@
-import {auth} from './config.js'
-import {sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+import {auth,sendPasswordResetEmail } from './config.js'
 
 const email = document.getElementById("login_email");
 const resetbutton = document.getElementById("reset_btn");

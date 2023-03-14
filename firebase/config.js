@@ -1,15 +1,17 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+import { getFirestore, collection,doc, addDoc, getDocs, query, where, updateDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut,
+    sendPasswordResetEmail,
+    GoogleAuthProvider, signInWithPopup, FacebookAuthProvider 
 } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getStorage, ref,uploadString, getDownloadURL,deleteObject } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js";
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -28,4 +30,23 @@ export const auth = getAuth();
 export {createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     onAuthStateChanged,
-    signOut};
+    sendPasswordResetEmail,
+    GoogleAuthProvider, 
+    signInWithPopup, 
+    FacebookAuthProvider,
+
+    signOut,
+    collection,
+    doc,
+    addDoc,
+    getDocs,
+    query,
+    where,
+    updateDoc,
+
+    getStorage, 
+    ref,
+    uploadString, 
+    getDownloadURL,
+    deleteObject
+};

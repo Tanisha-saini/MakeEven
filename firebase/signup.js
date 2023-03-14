@@ -1,30 +1,17 @@
-import { app, database, auth,createUserWithEmailAndPassword } from "./config.js";
-import { collection,addDoc } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+import { app, database, auth,createUserWithEmailAndPassword, collection, addDoc } from "./config.js";
 
 //............................REFERENCES............................//
-// const Fname = document.getElementById("firstName");
-// const Lname = document.getElementById("lastName");
 const email = document.getElementById("email");
 const pswrd = document.getElementById("password");
 const cnfrmpswrd = document.getElementById("cnfrmpassword");
-// const bdate = document.getElementById("birthDate");
-// const pno = document.getElementById("phoneNumber");
-// const gender = document.getElementsByName('gender')[0];
-// const ageGroup = document.getElementsByName('age-group')[0];
-// const country = document.getElementById("country");
-// const state = document.getElementById("state");
-// const address = document.getElementById("address");
-// const intro = document.getElementById("intro");
-
 const submit = document.getElementById("register_btn");
 
 //..................................VALIDATION.........................//
 function validation() {
     let nameregex = /^[a-zA-Z\s]+$/;
-    let emailregex = /^[a-zA-Z0-9]+@(gmail|yahoo|outlook)\.com$/;
+    let emailregex =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     if (!emailregex.test(email.value)) {
-        console.log(email.value);
         alert("Enter a valid email");
         return false;
     }
@@ -35,6 +22,7 @@ function validation() {
     }
     return true;
 }
+
 //...............................................REGISTER USER TO FIREBASE.........................................//
 function RegisterUser() {
     if (!validation()) {
@@ -42,24 +30,21 @@ function RegisterUser() {
     }
     createUserWithEmailAndPassword(auth, email.value, pswrd.value)
         .then((userCredential) => {
-            // Signed in
-            // const user = userCredential.user;
-            // set(ref(database, 'users/' + user.uid), {
-            //     email: email.value,
-            // })
             const user = userCredential.user;
             addDoc(collection(database, "users"), {
                 uid: user.uid,
                 email: email.value,
+                profilephotourl: 'https://firebasestorage.googleapis.com/v0/b/make-even-d50ab.appspot.com/o/user.png?alt=media&token=a9ed9591-caab-4743-999d-a68810177340',
+                formsubmitted:false,
             }).then((docRef) => {
-                console.log("anmol Document written with ID: ", docRef.id);
+                console.log("Document written with ID: ", docRef.id);
                 alert("user created");
+                window.location.href='editprofile.html';
             });
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-
             alert(errorCode, errorMessage);
         });
 }
