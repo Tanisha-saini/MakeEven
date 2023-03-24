@@ -31,16 +31,28 @@ function RegisterUser() {
     createUserWithEmailAndPassword(auth, email.value, pswrd.value)
         .then((userCredential) => {
             const user = userCredential.user;
+
+            addDoc(collection(database, "friendchat"), {
+                parentid: user.uid,
+                friendids: []
+            }).then((docRef) => {
+                console.log("Document written with ID:", docRef.id);
+            })
+
+            
+            const currentdate = new Date();
             addDoc(collection(database, "users"), {
                 uid: user.uid,
                 email: email.value,
                 profilephotourl: 'https://firebasestorage.googleapis.com/v0/b/make-even-d50ab.appspot.com/o/user.png?alt=media&token=a9ed9591-caab-4743-999d-a68810177340',
                 formsubmitted:false,
+                lastlogin:currentdate,
             }).then((docRef) => {
                 console.log("Document written with ID: ", docRef.id);
                 alert("user created");
                 window.location.href='editprofile.html';
             });
+
         })
         .catch((error) => {
             const errorCode = error.code;

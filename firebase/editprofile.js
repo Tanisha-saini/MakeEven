@@ -18,7 +18,6 @@ radioButtons.forEach(function(radioButton) {
 });
 
 function validateform(){
-    console.log("yo");
     const firstname = document.querySelector(".firstname").value;
     const country = document.querySelector(".country").value;
     const state = document.querySelector(".state").value;
@@ -106,7 +105,6 @@ function saveuserdetails(e){
                 }
             }
             else{
-                console.log("hi");
                 const url = 'https://firebasestorage.googleapis.com/v0/b/make-even-d50ab.appspot.com/o/user.png?alt=media&token=a9ed9591-caab-4743-999d-a68810177340';
                 const img = document.getElementById('output');
                 img.src = url;
@@ -126,6 +124,7 @@ function saveuserdetails(e){
             updateDoc(docRef, dataa)
             .then(docRef => {
                 console.log("A New Document Field has been added to an existing document");
+                window.location.href='index.html';
             })
             .catch(error => {
                 console.log(error);

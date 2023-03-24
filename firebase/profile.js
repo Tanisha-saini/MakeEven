@@ -19,7 +19,7 @@ country.readOnly=true;
 state.readOnly=true;
 bio.readOnly=true;
 radioButtons.readOnly=true;
-img.readOnly=true;
+
 
 function viewDetails(){
     const user = auth.currentUser;

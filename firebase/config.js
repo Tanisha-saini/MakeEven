@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-import { getFirestore, collection,doc, addDoc, getDocs, query, where, updateDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+import { getFirestore, collection, doc, addDoc, getDocs, query, where, updateDoc, onSnapshot,orderBy } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -8,9 +8,9 @@ import {
     onAuthStateChanged,
     signOut,
     sendPasswordResetEmail,
-    GoogleAuthProvider, signInWithPopup, FacebookAuthProvider 
+    GoogleAuthProvider, signInWithPopup, FacebookAuthProvider
 } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-import { getStorage, ref,uploadString, getDownloadURL,deleteObject } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js";
+import { getStorage, ref, uploadString, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js";
 
 
 // Your web app's Firebase configuration
@@ -27,12 +27,13 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const database = getFirestore(app);
 export const auth = getAuth();
-export {createUserWithEmailAndPassword,
+export {
+    createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     onAuthStateChanged,
     sendPasswordResetEmail,
-    GoogleAuthProvider, 
-    signInWithPopup, 
+    GoogleAuthProvider,
+    signInWithPopup,
     FacebookAuthProvider,
 
     signOut,
@@ -43,10 +44,12 @@ export {createUserWithEmailAndPassword,
     query,
     where,
     updateDoc,
+    onSnapshot,
+    orderBy,
 
-    getStorage, 
+    getStorage,
     ref,
-    uploadString, 
+    uploadString,
     getDownloadURL,
     deleteObject
 };

@@ -11,11 +11,26 @@
     justify-content: center;
     align-items: center;
 }
+#profile {
+    cursor: auto;
+}
 
 #Logout-btn:hover{
     background-color: var(--bg-color);
     color: black;
 }
+
+#profile img{
+    border:0.2rem solid var(--primaryclr);
+}
+
+#-label{
+    cursor:auto;
+}
+#-label:hover{
+    background-color: transparent;
+}
+
 
 @media screen and (max-width:550px) {
 

@@ -1,4 +1,4 @@
-import {auth,app,onAuthStateChanged,signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from './config.js';
+import {auth,app,collection,where,doc, getDocs,database,onAuthStateChanged,signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, updateDoc,query } from './config.js';
 //............................REFERENCES............................//
 const email = document.getElementById("login_email");
 const pswrd = document.getElementById("login_password");
@@ -9,45 +9,34 @@ const loginbyfb = document.getElementById("facebooksignin");
 
 //...............................................login USER .........................................//   
 function LoginUser() {
-    signInWithEmailAndPassword(auth, email.value, pswrd.value)
+        signInWithEmailAndPassword(auth, email.value, pswrd.value)
         .then((userCredential) => {
             // Signed in 
-            const user = userCredential.user;
-            const dt = new Date();
-            update(ref(database, 'users/' + user.uid), {
-                last_login: dt
-            })
+            var uid = userCredential.user.uid;
             alert('user logged in');
             // ...
-            
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            alert(errorMessage);
+            alert(errorCode,errorMessage);
         });
-
+        
 }
+
 //.....................................................Google login...........................................//
 function googlelogin() {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
         .then((result) => {
-            // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
-            // The signed-in user info.
             const user = result.user;
-            // IdP data available using getAdditionalUserInfo(result)
-            // ...
             console.log(result);
         }).catch((error) => {
-            // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
-            // The email of the user's account used.
             const email = error.customData.email;
-            // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
             console.log(errorMessage);
@@ -59,24 +48,18 @@ function facebooklogin() {
     const provider = new FacebookAuthProvider();
     signInWithPopup(auth, provider)
         .then((result) => {
-            // The signed-in user info.
             const user = result.user;
 
-            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
             const credential = FacebookAuthProvider.credentialFromResult(result);
             const accessToken = credential.accessToken;
 
-            // IdP data available using getAdditionalUserInfo(result)
-            // ...
             console.log(result);
         })
         .catch((error) => {
             // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
-            // The email of the user's account used.
             const email = error.customData.email;
-            // The AuthCredential type that was used.
             const credential = FacebookAuthProvider.credentialFromError(error);
 
             // ...
@@ -86,27 +69,36 @@ function facebooklogin() {
 
 //.......................................get current user.........................................//
 const user = auth.currentUser;
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async(user) => {
     if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
-        // const displayName = user.displayName;
-        // const email = user.email;
-        // const photoURL = user.photoURL;
-        // const emailVerified = user.emailVerified;
         console.log("current user: ", uid);
-        window.location = "index.html";
-        // ...
-    } else {
-        // User is signed out
-        // ...
-        // var loginBtn = document.getElementsByClassName("Login_button")[0];
-        // loginBtn.value = "Login";
+        const currentdate = new Date();
+            var lastlogindate = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear();
+        const q = await query(collection(database, "users"), where("uid", "==", uid));
+        console.log(q);
+        await getDocs(q)
+        .then((querySnapshot) => {
+            console.log("yo");
+            console.log(querySnapshot)
+            querySnapshot.forEach((docdata) => {
+                console.log("yo");
+                const docRef = doc(database, "users", docdata.id);
+                updateDoc(docRef,{lastlogin:lastlogindate});
+            })
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+        setTimeout(()=>{window.location.href="index.html";},400);
+    } 
+    else {
     }
 });
 
 //..................................................ASSIGN THE EVENTS..............................//   
 login.addEventListener("click", LoginUser);
-loginbygoogle.addEventListener("click", googlelogin);
-loginbyfb.addEventListener("click", facebooklogin);
+// loginbygoogle.addEventListener("click", googlelogin);
+// loginbyfb.addEventListener("click", facebooklogin);

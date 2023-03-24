@@ -15,6 +15,7 @@ import {
   getDownloadURL,
   deleteObject,
 } from "./config.js";
+import { arrayUnion } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 
 const list = document.querySelectorAll(".menu-items li a");
 const searchlink = list[1];
@@ -51,6 +52,7 @@ onAuthStateChanged(auth, (user) => {
       collection(database, "users"),
       where("uid", "==", user.uid)
     );
+
     getDocs(q).then((querySnapshot) => {
       querySnapshot.forEach((docdata) => {
         let qu;
@@ -93,6 +95,22 @@ onAuthStateChanged(auth, (user) => {
             d.append(d1);
             d.append(d2);
             mainDiv.appendChild(d);
+
+            btn.addEventListener("click", async() => {
+              const fid = doc.data().uid;
+              console.log("A");
+              await chat_option(user.uid, fid);
+              console.log("B");
+              await chat_option(fid,user.uid);
+              console.log("C");
+              
+              setTimeout(()=>{window.location.href="chat.html";},400);
+              
+            })
+
+            img.addEventListener("click",async()=>{
+              window.location.href="seeprofileonsearch.html?"+doc.data().uid;
+            })
           });
         });
       });
@@ -103,7 +121,8 @@ onAuthStateChanged(auth, (user) => {
 inp.addEventListener("keyup", (e) => {
   let filter = e.target.value.toUpperCase();
   let list = document.querySelectorAll("#elements .element");
-  for (var i = 0; i < list.length; i++) {
+  for (var i = 0; i < list.length; i++) 
+  {
     let match = list[i]
       .getElementsByTagName("div")[1]
       .getElementsByTagName("p")[0];
@@ -115,3 +134,60 @@ inp.addEventListener("keyup", (e) => {
     }
   }
 });
+let fname;
+
+//adding friend ids in firestore collection "friendchat"
+const chat_option=async(fid, userid)=> {
+  console.log("in function");
+  const q = await query(collection(database, "friendchat"), where("parentid", "==", userid));
+  console.log("query");
+  await getDocs(q)
+    .then(async(querySnapshot) => {
+      console.log("getdoc");
+      await querySnapshot.forEach(async(docdata) => {
+        const docRef = await doc(database, "friendchat", docdata.id);
+        const fids = docdata.data().friendids;
+        console.log(fids);
+        let flag = 0;
+        const q = await query(
+          collection(database, "users"),
+          where("uid", "==", fid)
+        );
+        console.log("qe");
+        //to update fname if changed in profile
+        await getDocs(q).then(async(querySnapshot) => {
+          console.log("getdoc for name");
+          await querySnapshot.forEach(async(docd) => {
+            fname = await docd.data().firstname;
+            console.log(fname);
+
+            for (let i = 0; i < fids.length; i++) {
+
+              if (fids[i].fid == fid) {
+                flag = 1;
+                console.log(fname);
+                // console.log(docdata.data().friendids[i].fname);
+                fids[i].fname=fname;
+                console.log(fids);
+                console.log("update doc");
+                await updateDoc(docRef, {
+                  friendids: fids
+                })
+                break;
+              }
+            }
+            if (flag == 0) {
+              console.log("update doc");
+              await updateDoc(docRef, {
+                friendids: arrayUnion({ fid, fname })
+              })
+            }
+          })
+        })
+
+
+      })
+    })
+  console.log("function end");
+}
+
