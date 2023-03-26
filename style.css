@@ -44,18 +44,19 @@ body {
 
 ::-webkit-scrollbar {
   width: 0.4rem;
-  height: 0.4rem
+  height: 0.4rem;
 }
 
 ::-webkit-scrollbar-track-piece {
-  background: transparent
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #888
-}​
+  background: #888;
+}
+​
 
 /*..................................................Navbar................................................................*/
-.navbar-container input[type="checkbox"]{
+.navbar-container input[type="checkbox"] {
   display: none;
 }
 
@@ -760,7 +761,6 @@ footer h3 {
   color: var(--secondaryclr);
 }
 
-
 /*...................................chat............................*/
 
 #chat_body {
@@ -808,7 +808,7 @@ footer h3 {
   display: flex;
   align-items: center;
   padding: 2%;
-  height:5vh;
+  height: 5vh;
 }
 
 #search_user {
@@ -918,7 +918,7 @@ footer h3 {
   height: 100%;
   width: 100%;
   padding: 1%;
-  background:none;
+  background: none;
 }
 
 #rcvr_msg {
@@ -1002,6 +1002,235 @@ iframe {
   width: 75%;
 }
 
+/* ......................................................Forum Page............................................................ */
+
+.firstHalf {
+  position: fixed;
+  top: 30px;
+  text-align: center;
+  height: 100%;
+  width: 30%;
+  font-weight: bolder;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url("assets/forumimage2.png");
+  background-size: contain;
+  background-position-y: center;
+  transform: scale(1.3);
+  background-repeat: no-repeat;
+}
+
+.secondHalf {
+  margin-top: 20px;
+  width: 55%;
+  top: 10%;
+  position: relative;
+  left: 35%;
+}
+
+.questioncard {
+  position: relative;
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: rgb(151, 143, 143, 0.2);
+  width: 100%;
+  padding: 5%;
+  border-radius: 5px;
+}
+
+#addques {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  background-color: #d9d9d9;
+  padding: 15px;
+  letter-spacing: 2px;
+  color: black;
+  border-radius: 5px;
+  opacity: 0.6;
+  font-weight: bold;
+}
+
+.plus {
+  position: absolute;
+  right: 20px;
+}
+
+.addcontent input,
+.addcontent textarea {
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: rgb(0, 0, 0, 0);
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.addcontent button {
+  padding: 10px;
+  background-color: #c2bed9;
+  border-radius: 5px;
+  margin-right: 5px;
+  visibility: hidden;
+}
+
+.addcontent div {
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+}
+
+/* .PageChoice {
+  display: flex;
+  border-bottom: 2px solid rgb(217, 213, 213);
+  padding: 20px;
+} */
+
+/* .PageChoice a {
+  text-decoration: none;
+  color: Gray;
+  padding-right: 5%;
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+.PageChoice a:hover {
+  color: black;
+  font-weight: bold;
+}
+
+.PageChoice a:active {
+  color: black;
+  font-weight: bold;
+} */
+
+.questionElement {
+  position: relative;
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: rgb(151, 143, 143, 0.2);
+  width: 100%;
+  border-radius: 5px;
+  padding: 3% 3% 8% 3%;
+}
+
+.uname {
+  font-size: 95%;
+  color: grey;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+.anstext {
+  text-align: justify;
+  font-size: 90%;
+  margin: 10px 5px 5px 0px;
+  text-transform: capitalize;
+  padding-bottom: 5px;
+}
+
+.ansname {
+  font-size: 95%;
+  color: grey;
+  margin: 10px 5px 0px 0px;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+.anstime {
+  font-size: 57%;
+  color: #117964;
+  padding-top: 1px;
+  margin-bottom: 5px;
+}
+.qimg {
+  width: 70px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.qtime {
+  font-size: 60%;
+  color: #117964;
+  padding-top: 1px;
+}
+
+.qTitle {
+  padding: 10px 5px 5px 0px;
+  font-size: 120%;
+  font-weight: bold;
+  /* border-bottom: 1px solid rgb(190, 186, 186); */
+  /* text-decoration: underline; */
+}
+
+.qDesc {
+  text-align: justify;
+  font-size: 90%;
+  margin-bottom: 30px;
+}
+
+.questionElement button {
+  padding: 8px;
+  background-color: #c2bed9;
+  border-radius: 5px;
+  margin: 30px 5px 5px 5px;
+  font-size: 12px;
+}
+
+.qeleBtn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.ansInput {
+  position: relative;
+  display: flex;
+  margin: 10px 10px 10px 40px;
+  background-color: rgb(151, 143, 143, 0.2);
+  width: 95%;
+  padding: 3%;
+}
+
+.ansBtn {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+
+.ansInput img {
+  margin-right: 25px;
+}
+
+.ansInput textarea {
+  padding: 10px;
+  margin-bottom: 30px;
+  background-color: white;
+  width: 100%;
+}
+
+.ansBtn button {
+  padding: 8px;
+  background-color: #c2bed9;
+  border-radius: 8px;
+}
+
+.ansDisplay {
+  margin: 10px 10px 10px 40px;
+  background-color: rgb(151, 143, 143, 0.2);
+  width: 95%;
+  padding: 1%;
+}
+
+.ansElement {
+  position: relative;
+  display: flex;
+  margin: 20px;
+  background-color: white;
+}
+
 /* ......................................................Media Queries............................................................ */
 
 @media screen and (max-width: 1100px) {
@@ -1063,6 +1292,24 @@ iframe {
   .signup_container {
     padding: 2rem 0;
     margin: 5rem 2rem 0 2rem;
+  }
+  .firstHalf {
+    display: none;
+  }
+  .secondHalf {
+    justify-content: center;
+    margin: auto;
+    width: 80%;
+    left: 0px;
+  }
+  #addques {
+    margin-top: 30px;
+  }
+  .ansDisplay {
+    margin-left: 22px;
+  }
+  .ansInput {
+    margin-left: 22px;
   }
 }
 
@@ -1303,6 +1550,38 @@ iframe {
     width: 50px;
     height: 50px;
   }
+  .qimg,
+  .questioncard img,
+  .ansElement img {
+    height: 30px;
+    width: 30px;
+  }
+
+  .questionElement p {
+    font-size: small;
+  }
+  .qDesc {
+    padding-bottom: 5px;
+  }
+  .addcontent textarea,
+  input {
+    width: 100%;
+    font-size: 10px;
+  }
+  .ansDisplay p {
+    font-size: small;
+  }
+
+  .ansDisplay {
+    margin-left: 10px;
+  }
+  .ansInput {
+    margin-left: 10px;
+  }
+  .qTime,
+  .anstime {
+    font-size: 3px;
+  }
 }
 
 @media (max-width: 500px) {
@@ -1327,8 +1606,8 @@ iframe {
     height: 50px;
   }
 
-  #user_search_container img{
-    height:2vh;
+  #user_search_container img {
+    height: 2vh;
     width: 2vh;
   }
 }
@@ -1337,24 +1616,34 @@ iframe {
   .ham_button {
     width: 15%;
   }
-  #left_body{
-    width:50%;
+  #left_body {
+    width: 50%;
   }
-  #user_pic{
+  #user_pic {
     height: 1.5rem;
     width: 1.5rem;
   }
-  #last_time{
+  #last_time {
     display: none;
   }
-  iframe{
+  iframe {
     width: 70%;
   }
-  .user{
+  .user {
     padding: 3.5% 0%;
   }
-  #rcvr{
-    gap:0.5rem;
+  #rcvr {
+    gap: 0.5rem;
+  }
+  .qeleBtn {
+    font-size: small;
+    right: 0px;
+    bottom: 2px;
+  }
+  #addques {
+    font-size: 13px;
+    margin-top: 30px;
+    padding: 10px;
   }
 }
 
@@ -1367,5 +1656,9 @@ iframe {
     padding: 10px 0px 50px 0px;
     width: 100%;
     font-size: 10px;
+  }
+  #addques {
+    font-size: 10px;
+    margin-top: 30px;
   }
 }
