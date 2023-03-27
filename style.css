@@ -50,9 +50,11 @@ body {
 ::-webkit-scrollbar-track-piece {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #888;
 }
+
 ​
 
 /*..................................................Navbar................................................................*/
@@ -98,6 +100,7 @@ body {
   order: 2;
   display: flex;
 }
+
 .logo {
   order: 1;
 }
@@ -143,9 +146,11 @@ body {
   background-color: var(--bg-color);
   color: white;
   border-radius: 0.5rem;
+
 }
 
 #profile-button img {
+  height: 1.5rem;
   height: 2rem;
   width: 2rem;
   padding: 0.2rem;
@@ -691,9 +696,7 @@ footer h3 {
   border: none;
   box-shadow: 0px -2px 3px 2px rgba(0, 0, 0, 0.2);
   margin: 20px;
-  background: white
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='20' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E")
-    no-repeat right;
+  background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='20' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat right;
 }
 
 #elements {
@@ -726,6 +729,7 @@ footer h3 {
   height: 100px;
   border-radius: 20px;
 }
+
 .name {
   text-transform: capitalize;
 }
@@ -782,7 +786,7 @@ footer h3 {
 }
 
 #right_body {
-  height: 98vh;
+  /* height: 98vh; */
   width: 100%;
   background-color: transparent;
   font-size: large;
@@ -838,11 +842,13 @@ footer h3 {
   background-color: #f7f3f3;
   color: #000000;
 }
+
 #user_details {
   display: flex;
   flex-direction: column;
   width: 55%;
 }
+
 #last_message {
   font-size: 12px;
   color: #5f5e5e;
@@ -853,13 +859,16 @@ footer h3 {
   max-width: 90%;
   height: 12px;
 }
+
 #second_div {
   align-self: flex-end;
 }
+
 #last_time {
   font-size: 12px;
   color: #5f5e5e;
 }
+
 #user_pic {
   height: 2.5rem;
   width: 2.5rem;
@@ -868,7 +877,7 @@ footer h3 {
 }
 
 #chat {
-  height: 80vh;
+  height: 85vh;
   padding: 2%;
   overflow: auto;
   border-radius: 0px 0px 5px 5px;
@@ -888,6 +897,7 @@ footer h3 {
 
   margin-top: 2vh;
 }
+
 #rcvr {
   display: flex;
   flex-direction: row;
@@ -895,12 +905,14 @@ footer h3 {
   align-items: center;
   justify-content: center;
 }
+
 #rcvr_pic {
   height: 2rem;
   width: 2rem;
   border-radius: 50%;
   object-fit: cover;
 }
+
 #write_msg_body {
   height: 7vh;
   display: flex;
@@ -954,11 +966,13 @@ footer h3 {
   display: flex;
   flex-direction: column;
 }
+
 #msg {
   word-wrap: break-word;
   align-self: flex-start;
   width: 95%;
 }
+
 #time {
   align-self: flex-end;
   font-size: 10px;
@@ -998,6 +1012,7 @@ footer h3 {
 .dropup:hover .dropup-content {
   display: block;
 }
+
 iframe {
   width: 75%;
 }
@@ -1145,6 +1160,7 @@ iframe {
   padding-top: 1px;
   margin-bottom: 5px;
 }
+
 .qimg {
   width: 70px;
   height: 60px;
@@ -1239,6 +1255,7 @@ iframe {
     width: 70%;
   }
 }
+
 @media screen and (max-width: 850px) {
   #head-right {
     display: none;
@@ -1277,9 +1294,11 @@ iframe {
   textarea {
     padding: 0.2rem;
   }
+
   .form_item input {
     width: 15rem;
   }
+
   .login_switch {
     margin: 1rem;
   }
@@ -1293,21 +1312,26 @@ iframe {
     padding: 2rem 0;
     margin: 5rem 2rem 0 2rem;
   }
+
   .firstHalf {
     display: none;
   }
+
   .secondHalf {
     justify-content: center;
     margin: auto;
     width: 80%;
     left: 0px;
   }
+
   #addques {
     margin-top: 30px;
   }
+
   .ansDisplay {
     margin-left: 22px;
   }
+
   .ansInput {
     margin-left: 22px;
   }
@@ -1409,19 +1433,19 @@ iframe {
     font-size: 2.5rem;
   }
 
-  .navbar-container input[type="checkbox"]:checked ~ .menu-items {
+  .navbar-container input[type="checkbox"]:checked~.menu-items {
     transform: translateX(0);
   }
 
-  .navbar-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+  .navbar-container input[type="checkbox"]:checked~.hamburger-lines .line1 {
     transform: rotate(45deg);
   }
 
-  .navbar-container input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+  .navbar-container input[type="checkbox"]:checked~.hamburger-lines .line2 {
     transform: scaleY(0);
   }
 
-  .navbar-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+  .navbar-container input[type="checkbox"]:checked~.hamburger-lines .line3 {
     transform: rotate(-45deg);
   }
 
@@ -1515,6 +1539,7 @@ iframe {
     grid-template-columns: 100%;
     width: 60%;
   }
+
   .element .div1 img {
     width: 50px;
     height: 50px;
@@ -1546,10 +1571,12 @@ iframe {
   #elements {
     padding: 30px 0px 50px 0px;
   }
+
   .element .div1 img {
     width: 50px;
     height: 50px;
   }
+
   .qimg,
   .questioncard img,
   .ansElement img {
@@ -1560,14 +1587,17 @@ iframe {
   .questionElement p {
     font-size: small;
   }
+
   .qDesc {
     padding-bottom: 5px;
   }
+
   .addcontent textarea,
   input {
     width: 100%;
     font-size: 10px;
   }
+
   .ansDisplay p {
     font-size: small;
   }
@@ -1575,9 +1605,11 @@ iframe {
   .ansDisplay {
     margin-left: 10px;
   }
+
   .ansInput {
     margin-left: 10px;
   }
+
   .qTime,
   .anstime {
     font-size: 3px;
@@ -1585,7 +1617,7 @@ iframe {
 }
 
 @media (max-width: 500px) {
-  .navbar-container input[type="checkbox"]:checked ~ .logo {
+  .navbar-container input[type="checkbox"]:checked~.logo {
     display: none;
   }
 }
@@ -1601,6 +1633,7 @@ iframe {
     font-size: 10px;
     padding: 30px 10px 50px 10px;
   }
+
   .element .div1 img {
     width: 50px;
     height: 50px;
@@ -1616,30 +1649,38 @@ iframe {
   .ham_button {
     width: 15%;
   }
+
   #left_body {
     width: 50%;
   }
+
   #user_pic {
     height: 1.5rem;
     width: 1.5rem;
   }
+
   #last_time {
     display: none;
   }
+
   iframe {
     width: 70%;
   }
+
   .user {
     padding: 3.5% 0%;
   }
+
   #rcvr {
     gap: 0.5rem;
   }
+
   .qeleBtn {
     font-size: small;
     right: 0px;
     bottom: 2px;
   }
+
   #addques {
     font-size: 13px;
     margin-top: 30px;
@@ -1657,6 +1698,7 @@ iframe {
     width: 100%;
     font-size: 10px;
   }
+
   #addques {
     font-size: 10px;
     margin-top: 30px;

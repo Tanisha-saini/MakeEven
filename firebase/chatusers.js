@@ -187,9 +187,15 @@ onAuthStateChanged(auth, (user) => {
         console.log("New chat: ", change.doc.data());
         var obj = change.doc.data().chat;
         var len = obj.length;
-        var msgval = obj[len - 1].msg;
-        var time = obj[len - 1].time;
         var cid = change.doc.data().chatid;
+        if (len == 0) {
+          var msgval = "";
+          var time = "";
+        }
+        else {
+          var msgval = obj[len - 1].msg;
+          var time = obj[len - 1].time;
+        }
         console.log(msgval);
         console.log(time);
         getlastdata(cid, msgval, time);

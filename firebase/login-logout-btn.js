@@ -1,9 +1,9 @@
-import {auth,onAuthStateChanged,database, doc,collection,query,where,getDocs} from './config.js';
+import {auth,onAuthStateChanged,database, doc,collection,query,where,getDocs,signOut} from './config.js';
 
 
 const profileBtn = document.getElementById('profile-button');
 const loginBtn = document.getElementById('Login_button');
-
+const outBtn=document.getElementById('outBtn');
 //.......................................get current user.........................................//
 
 const user = auth.currentUser;
@@ -30,3 +30,17 @@ onAuthStateChanged(auth, (user) => {
         profileBtn.style.display = 'none';
     }
 });
+
+function logout() {
+    signOut(auth).then(() => {
+        alert("user logged out");
+        window.location.href='index.html';
+    }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+
+    });
+}
+
+outBtn.addEventListener("click",logout);
