@@ -143,7 +143,7 @@ body {
 
 #profile-button {
   display: none;
-  background-color: var(--bg-color);
+  /* background-color: var(--bg-color); */
   color: white;
   border-radius: 0.5rem;
 
@@ -603,11 +603,13 @@ header p {
 #feature-icon {
   height: 1.5rem;
   margin-top: 0.3rem;
+  margin-right: 0.5rem;
 }
 
 #feature-description {
   display: flex;
   flex-direction: column;
+  text-align: justify;
 }
 
 #feature-description h3 {
@@ -1071,6 +1073,7 @@ iframe {
 .plus {
   position: absolute;
   right: 20px;
+  cursor: pointer;
 }
 
 .addcontent input,
@@ -1194,6 +1197,7 @@ iframe {
   border-radius: 5px;
   margin: 30px 5px 5px 5px;
   font-size: 12px;
+  cursor:pointer;
 }
 
 .qeleBtn {
