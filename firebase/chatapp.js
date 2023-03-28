@@ -48,16 +48,6 @@ const unsubscribe = onSnapshot(q, (snapshot) => {
     });
 });
 
-// collection(database, "chats").onSnapshot((snapshot) => {
-//     snapshot.docChanges().forEach((change) => {
-//       if (change.type === 'added') {
-//         const message = change.doc.data();
-//         console.log(message);
-//         // Do something with the new message
-//       }
-//     });
-//   });
-
 
 function getchatbody(senderid, rcvrid) {
 
@@ -211,7 +201,7 @@ async function storemsg(senderid, rcvrid, msgval) {
             // do something with the data
             await snap.forEach(async (docdata) => {
                 // console.log("in then");
-                console.log(docdata.exists())
+                // console.log(docdata.exists())
                 if (docdata.exists()) {
                     // console.log("exists");
                     const docRef = await doc(database, "chats", docdata.id);

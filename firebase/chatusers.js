@@ -58,40 +58,18 @@ function addfriend(name, senderid, rcvrid, picurl, time, msg) {
   last_time.setAttribute("id", 'last_time');
   last_time.innerText = time;
   seconddiv.appendChild(last_time);
-  // const fuid=document.createElement('span');
-  // fuid.innerText="uid";
-  // fuid.style.display="none";
-  // getlasttime(senderid,rcvrid);
   friend.appendChild(id);
   friend.appendChild(pic);
   friend.appendChild(firstdiv);
   friend.appendChild(seconddiv);
-  // friend.appendChild(fname);
-  // friend.appendChild(fuid);
   list.appendChild(friend);
   const left = document.getElementById("left_body");
   const frame = document.querySelector("iframe");
   var screenwidth = window.screen.width;
-  // if(screenwidth<450){
-  //     left.style.width="100%";
-  //     frame.style.display="none";
-  // }
   friend.addEventListener("click", () => {
     sid = senderid;
     rid = rcvrid;
-    // localStorage["sid"] = sid;
-    // localStorage["rid"] = rid;
-    // localStorage["sname"]=name;
-
     frame.src = "chatright.html?" + sid + "|" + rid + "|" + name;
-    // frame.style.display = "block";
-    // if (screenwidth < 450) {
-    //     frame.style.width = "100%";
-
-    //     left.style.display="none";
-    // }
-
-    // friendwindow(name, senderid, rcvrid)
   })
 
 }
@@ -169,7 +147,7 @@ onAuthStateChanged(auth, (user) => {
       });
     });
   } else {
-    alert("Login first");
+    alert("Please login to continue");
     window.location.href = "login.html";
   }
 
@@ -223,27 +201,4 @@ inp.addEventListener("keyup", (e) => {
   }
 });
 
-// console.log(u);
-// const q = query(collection(database, "chats"), where("senderid", "==", u.uid));
-// const unsubscribe = onSnapshot(q, (snapshot) => {
-//   // console.log(sid);
-//   // console.log(rid);
-//   console.log("on snapshot");
-//   snapshot.docChanges().forEach((change) => {
-//     if (change.type === "added") {
-//       console.log("New chat: ", change.doc.data());
-//     }
-//     if (change.type === "modified") {
-//       console.log("New chat: ", change.doc.data());
-//       // var obj = change.doc.data().chat;
-//       // var len = obj.length;
-//       // var msgval = obj[len - 1].msg;
-//       // var time = obj[len - 1].time;
-//       // console.log(msgval);
-//       // console.log(time);
-//     }
-//     if (change.type === "removed") {
-//       console.log("Removed chat: ", change.doc.data());
-//     }
-//   });
-// });
+

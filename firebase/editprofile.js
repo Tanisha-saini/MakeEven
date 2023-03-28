@@ -148,9 +148,9 @@ function saveuserdetails(e) {
       };
       updateDoc(docRef, dataa)
         .then((docRef) => {
-          console.log(
-            "A New Document Field has been added to an existing document"
-          );
+          // console.log(
+          //   "A New Document Field has been added to an existing document"
+          // );
           setTimeout(() => {
             window.location.href = "index.html";
           }, 1500);

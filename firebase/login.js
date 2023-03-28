@@ -32,7 +32,7 @@ function googlelogin() {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
-            console.log(result);
+            // console.log(result);
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
@@ -53,7 +53,7 @@ function facebooklogin() {
             const credential = FacebookAuthProvider.credentialFromResult(result);
             const accessToken = credential.accessToken;
 
-            console.log(result);
+            // console.log(result);
         })
         .catch((error) => {
             // Handle Errors here.
@@ -72,19 +72,19 @@ const user = auth.currentUser;
 onAuthStateChanged(auth, async(user) => {
     if (user) {
         const uid = user.uid;
-        console.log("current user: ", uid);
+        // console.log("current user: ", uid);
         const currentdate = new Date();
             var lastlogindate = currentdate.getDate() + "/"
                 + (currentdate.getMonth()+1)  + "/" 
                 + currentdate.getFullYear();
         const q = await query(collection(database, "users"), where("uid", "==", uid));
-        console.log(q);
+        // console.log(q);
         await getDocs(q)
         .then((querySnapshot) => {
-            console.log("yo");
-            console.log(querySnapshot)
+            // console.log("yo");
+            // console.log(querySnapshot)
             querySnapshot.forEach((docdata) => {
-                console.log("yo");
+                // console.log("yo");
                 const docRef = doc(database, "users", docdata.id);
                 updateDoc(docRef,{lastlogin:lastlogindate});
             })

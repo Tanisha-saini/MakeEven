@@ -98,11 +98,11 @@ onAuthStateChanged(auth, (user) => {
 
             btn.addEventListener("click", async() => {
               const fid = doc.data().uid;
-              console.log("A");
+              // console.log("A");
               await chat_option(user.uid, fid);
-              console.log("B");
+              // console.log("B");
               await chat_option(fid,user.uid);
-              console.log("C");
+              // console.log("C");
               
               setTimeout(()=>{window.location.href="chat.html";},400);
               
@@ -138,38 +138,38 @@ let fname;
 
 //adding friend ids in firestore collection "friendchat"
 const chat_option=async(fid, userid)=> {
-  console.log("in function");
+  // console.log("in function");
   const q = await query(collection(database, "friendchat"), where("parentid", "==", userid));
-  console.log("query");
+  // console.log("query");
   await getDocs(q)
     .then(async(querySnapshot) => {
-      console.log("getdoc");
+      // console.log("getdoc");
       await querySnapshot.forEach(async(docdata) => {
         const docRef = await doc(database, "friendchat", docdata.id);
         const fids = docdata.data().friendids;
-        console.log(fids);
+        // console.log(fids);
         let flag = 0;
         const q = await query(
           collection(database, "users"),
           where("uid", "==", fid)
         );
-        console.log("qe");
+        // console.log("qe");
         //to update fname if changed in profile
         await getDocs(q).then(async(querySnapshot) => {
-          console.log("getdoc for name");
+          // console.log("getdoc for name");
           await querySnapshot.forEach(async(docd) => {
             fname = await docd.data().firstname;
-            console.log(fname);
+            // console.log(fname);
 
             for (let i = 0; i < fids.length; i++) {
 
               if (fids[i].fid == fid) {
                 flag = 1;
-                console.log(fname);
+                // console.log(fname);
                 // console.log(docdata.data().friendids[i].fname);
                 fids[i].fname=fname;
-                console.log(fids);
-                console.log("update doc");
+                // console.log(fids);
+                // console.log("update doc");
                 await updateDoc(docRef, {
                   friendids: fids
                 })
@@ -177,7 +177,7 @@ const chat_option=async(fid, userid)=> {
               }
             }
             if (flag == 0) {
-              console.log("update doc");
+              // console.log("update doc");
               await updateDoc(docRef, {
                 friendids: arrayUnion({ fid, fname })
               })
@@ -188,6 +188,6 @@ const chat_option=async(fid, userid)=> {
 
       })
     })
-  console.log("function end");
+  // console.log("function end");
 }
 
