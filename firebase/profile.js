@@ -30,7 +30,7 @@ function viewDetails(){
             .then((querySnapshot) => {
                 querySnapshot.forEach((docdata) => {
                     if(!docdata.data().formsubmitted){
-                        alert("You need to make your profile first")
+                        alert("Please create your profile to continue");
                         window.location.href='editprofile.html';
                     }
                     const docRef = doc(database, "users", docdata.id);
@@ -64,7 +64,7 @@ function viewDetails(){
 
 function logout() {
     signOut(auth).then(() => {
-        alert("user logged out");
+        // alert("user logged out");
         window.location.href='index.html';
     }).catch((error) => {
         const errorCode = error.code;

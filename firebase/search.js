@@ -33,7 +33,7 @@ searchlink.addEventListener("click", (e) => {
     getDocs(q).then((querySnapshot) => {
       querySnapshot.forEach((docdata) => {
         if (!docdata.data().formsubmitted) {
-          alert("You need to make your profile first");
+          alert("Please create your profile to continue");
           window.location.href = "editprofile.html";
         } else {
           window.location.href = "search.html";
@@ -41,7 +41,7 @@ searchlink.addEventListener("click", (e) => {
       });
     });
   } else {
-    alert("Login first");
+    alert("Please login to continue");
     window.location.href = "login.html";
   }
 });

@@ -41,15 +41,18 @@ function RegisterUser() {
 
             
             const currentdate = new Date();
+            var lastlogindate = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear();
             addDoc(collection(database, "users"), {
                 uid: user.uid,
                 email: email.value,
                 profilephotourl: 'https://firebasestorage.googleapis.com/v0/b/make-even-d50ab.appspot.com/o/user.png?alt=media&token=a9ed9591-caab-4743-999d-a68810177340',
                 formsubmitted:false,
-                lastlogin:currentdate,
+                lastlogin:lastlogindate,
             }).then((docRef) => {
-                console.log("Document written with ID: ", docRef.id);
-                alert("user created");
+                // console.log("Document written with ID: ", docRef.id);
+                alert("Account created successfully");
                 window.location.href='editprofile.html';
             });
 

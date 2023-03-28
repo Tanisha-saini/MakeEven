@@ -13,7 +13,7 @@ function LoginUser() {
         .then((userCredential) => {
             // Signed in 
             var uid = userCredential.user.uid;
-            alert('user logged in');
+            alert('Logged in successfully');
             // ...
         })
         .catch((error) => {

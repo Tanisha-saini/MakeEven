@@ -15,6 +15,7 @@ import {
   arrayUnion,
   onSnapshot,
   orderBy,
+  deleteDoc,
 } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 
 const list = document.querySelectorAll(".menu-items li a");
@@ -31,7 +32,7 @@ forumlink.addEventListener("click", (e) => {
     getDocs(q).then((querySnapshot) => {
       querySnapshot.forEach((docdata) => {
         if (!docdata.data().formsubmitted) {
-          alert("You need to make your profile first");
+          alert("Please create your profile to continue");
           window.location.href = "editprofile.html";
         } else {
           window.location.href = "forum.html";
@@ -39,7 +40,7 @@ forumlink.addEventListener("click", (e) => {
       });
     });
   } else {
-    alert("Login first");
+    alert("Please login to continue");
     window.location.href = "login.html";
   }
 });
@@ -118,6 +119,10 @@ onAuthStateChanged(auth, (user) => {
         const div3 = document.createElement("div");
         const p1 = document.createElement("p");
         p1.classList.add("uname");
+        p1.addEventListener("click", () => {
+          window.location.href =
+            "seeprofileonsearch.html?" + docdata.data().senderid;
+        });
         const p2 = document.createElement("p");
         p2.classList.add("qTime");
         const p3 = document.createElement("p");
@@ -170,6 +175,24 @@ onAuthStateChanged(auth, (user) => {
         div3.appendChild(div4);
         questionSection.appendChild(div1);
         div1.appendChild(div3);
+        const del = document.createElement("div");
+        del.classList.add("delbtn");
+        del.addEventListener("click", (e) => {
+          const qid =
+            e.target.parentElement.parentElement.getElementsByClassName(
+              "qid"
+            )[0].innerText;
+          deleteDoc(doc(database, "questions", qid));
+          const ansd = e.target.parentElement.parentElement.nextElementSibling;
+          e.target.parentElement.parentElement.remove();
+          ansd.remove();
+        });
+
+        del.innerHTML = "<i class='fa fa-trash-o' style='font-size:24px;'></i>";
+        del.style.position = "absolute";
+        del.style.right = "3%";
+        del.style.display = "none";
+        div1.appendChild(del);
         const div5 = document.createElement("div");
         div5.classList.add("ansDisplay");
         div5.style.display = "none";
@@ -190,6 +213,10 @@ onAuthStateChanged(auth, (user) => {
           pans1.classList.add("anstext");
           const pans2 = document.createElement("p");
           pans2.classList.add("ansname");
+          pans2.addEventListener("click", () => {
+            window.location.href =
+              "seeprofileonsearch.html?" + answers[i].ansid;
+          });
           const pans3 = document.createElement("p");
           pans3.classList.add("anstime");
           pans3.innerText = answers[i].anstime;
@@ -212,6 +239,25 @@ onAuthStateChanged(auth, (user) => {
           divans1.appendChild(divans2);
           divans1.appendChild(divans3);
           div5.appendChild(divans1);
+        }
+      });
+    });
+    const quescoll = document.getElementsByClassName("questionElement");
+    const q2 = query(
+      collection(database, "questions"),
+      where("senderid", "==", auth.currentUser.uid)
+    );
+    getDocs(q2).then((querySnapshot) => {
+      querySnapshot.forEach((docdta) => {
+        for (let i = 0; i < quescoll.length; i++) {
+          if (
+            quescoll[i].getElementsByClassName("qid")[0].innerText ==
+            docdta.data().qid
+          ) {
+            // console.log(quescoll[i].getElementsByClassName("delbtn")[0]);
+            quescoll[i].getElementsByClassName("delbtn")[0].style.display =
+              "block";
+          }
         }
       });
     });
@@ -240,24 +286,47 @@ const unsubscribe = onSnapshot(q, (snapshot) => {
             const ansl = change.doc.data().ans.length;
             const data = change.doc.data().ans[ansl - 1].ans;
             const time = change.doc.data().ans[ansl - 1].anstime;
-            // console.log(data);
+            const id = change.doc.data().ans[ansl - 1].ansid;
             let ansdis;
             const allqid = document.querySelectorAll(".qid");
             for (let i = 0; i < allqid.length; i++) {
               if (allqid[i].textContent == change.doc.data().qid) {
+                const ansinput =
+                  allqid[i].parentElement.parentElement.nextElementSibling;
+                if (ansinput.classList.contains("ansInput")) {
+                  allqid[
+                    i
+                  ].parentElement.parentElement.nextElementSibling.remove();
+                  allqid[i].parentElement.parentElement.getElementsByClassName(
+                    "resbtn"
+                  )[0].innerText = "Add Response";
+                }
                 ansdis =
                   allqid[i].parentElement.parentElement.nextElementSibling;
               }
             }
             const name =
               docdata.data().firstname + " " + docdata.data().lastname;
-            ansDisplay(imgsrc, data, ansdis, name, time);
+            ansDisplay(imgsrc, data, ansdis, name, time, id);
           });
         });
       }
     }
     if (change.type === "removed") {
-      //   console.log("Removed city: ", change.doc.data());
+      // console.log("Removed city: ", change.doc.data());
+      const removedEle = change.doc.data().qid;
+      const quesEle = document.getElementsByClassName("questionElement");
+      for (let i = 0; i < quesEle.length; i++) {
+        if (
+          quesEle[i].getElementsByClassName("qid")[0].innerText == removedEle
+        ) {
+          quesEle[i].nextElementSibling.remove();
+          if (quesEle[i].nextElementSibling.classList.contains("ansDisplay")) {
+            quesEle[i].nextElementSibling.remove();
+          }
+          quesEle[i].remove();
+        }
+      }
     }
   });
 });
@@ -317,7 +386,6 @@ function resbtnfunc(e) {
     div1.appendChild(div4);
     questionElement.after(div1);
   } else {
-    // console.log("Cancel");
     e.target.innerText = "Add Response";
     const questionElement = e.target.parentElement.parentElement.parentElement;
     questionElement.nextSibling.remove();
@@ -364,9 +432,6 @@ function ansStore(e) {
       updateDoc(docRef, {
         ans: arrayUnion({ ansid: user.uid, ans: data, anstime: tym }),
       });
-    } else {
-      alert("Login first");
-      window.location.href = "login.html";
     }
   });
   e.target.parentElement.parentElement.previousElementSibling.getElementsByClassName(
@@ -376,7 +441,7 @@ function ansStore(e) {
   //ansDisplay(imgsrc, data, ansdis, name,tym);
 }
 
-function ansDisplay(imgsrc, data, ansdis, name, tym) {
+function ansDisplay(imgsrc, data, ansdis, name, tym, id) {
   const div1 = document.createElement("div");
   div1.classList.add("ansElement");
   const div2 = document.createElement("div");
@@ -398,6 +463,9 @@ function ansDisplay(imgsrc, data, ansdis, name, tym) {
   const p2 = document.createElement("p");
   p2.classList.add("ansname");
   p2.innerText = name;
+  p2.addEventListener("click", () => {
+    window.location.href = "seeprofileonsearch.html?" + id;
+  });
   div3.appendChild(p2);
   div3.appendChild(p3);
   div3.appendChild(p1);
@@ -431,6 +499,10 @@ function questionDisplay(timenow, qid) {
   const q1 = query(collection(database, "questions"), where("qid", "==", qid));
   getDocs(q1).then((querySnapshot) => {
     querySnapshot.forEach((docdata) => {
+      p1.addEventListener("click", () => {
+        window.location.href =
+          "seeprofileonsearch.html?" + docdata.data().senderid;
+      });
       p3.innerHTML = docdata.data().qtitle;
       p4.innerHTML = docdata.data().qdesc;
       const q = query(
@@ -482,6 +554,43 @@ function questionDisplay(timenow, qid) {
   questionSection.prepend(div1);
   div1.appendChild(div3);
   plus.innerHTML = "<i class='fa fa-plus' style='font-size:24px'></i>";
+  const del = document.createElement("div");
+  del.classList.add("delbtn");
+  del.addEventListener("click", (e) => {
+    const qid =
+      e.target.parentElement.parentElement.getElementsByClassName("qid")[0]
+        .innerText;
+    deleteDoc(doc(database, "questions", qid));
+    e.target.parentElement.parentElement.nextElementSibling.remove();
+    e.target.parentElement.parentElement.remove();
+  });
+
+  del.innerHTML = "<i class='fa fa-trash-o' style='font-size:24px;'></i>";
+  del.style.position = "absolute";
+  del.style.right = "3%";
+  del.style.display = "none";
+  div1.appendChild(del);
+  setTimeout(async () => {
+    const quescoll = document.getElementsByClassName("questionElement");
+    const q2 = await query(
+      collection(database, "questions"),
+      where("senderid", "==", auth.currentUser.uid)
+    );
+    await getDocs(q2).then((querySnapshot) => {
+      querySnapshot.forEach((docdta) => {
+        // console.log(docdta.data().qid);
+        for (let i = 0; i < quescoll.length; i++) {
+          if (
+            quescoll[i].getElementsByClassName("qid")[0].innerText ==
+            docdta.data().qid
+          ) {
+            quescoll[i].getElementsByClassName("delbtn")[0].style.display =
+              "block";
+          }
+        }
+      });
+    });
+  }, 1000);
   flag = false;
 }
 
@@ -514,21 +623,18 @@ function questionStore() {
         qdesc: descVal,
         ans: [],
       }).then((docRef) => {
-        console.log("Document written with ID:", docRef.id);
+        // console.log("Document written with ID:", docRef.id);
         const dataa = {
           qid: docRef.id,
         };
         updateDoc(docRef, dataa)
           .then((docRef) => {
-            console.log("question id changed");
+            // console.log("question id changed");
           })
           .catch((error) => {
             console.log(error);
           });
       });
-    } else {
-      alert("Login first");
-      window.location.href = "login.html";
     }
   });
 }
