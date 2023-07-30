@@ -161,6 +161,7 @@ const chat_option=async(fid, userid)=> {
             fname = await docd.data().firstname;
             // console.log(fname);
 
+            // if friend already exists and they have changed their name, updating it in the friend chat database
             for (let i = 0; i < fids.length; i++) {
 
               if (fids[i].fid == fid) {
