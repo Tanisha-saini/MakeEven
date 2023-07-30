@@ -18,7 +18,7 @@ import {
 import { arrayUnion } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 
 var queryString = location.search.substring(1);
-var a = queryString.split("|");
+var a = queryString.split("|"); //taken from search.js
 var rid = a[0];
 
 // console.log(rid);
