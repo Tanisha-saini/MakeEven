@@ -3,7 +3,7 @@ const user = auth.currentUser;
 import { arrayUnion, onSnapshot } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 
 var queryString = location.search.substring(1);
-var a = queryString.split("|");
+var a = queryString.split("|"); //taken from chatusers.js
 var sid = a[0];
 var rid = a[1];
 var sname = a[2];
