@@ -14,7 +14,7 @@ const user = auth.currentUser;
 import { onSnapshot } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 var sid;
 var rid;
-
+//display last message data for every friend in left side
 function getlastdata(chatid, msg, time) {
   const item = document.getElementById(chatid);
   // console.log(item.innerText);
@@ -73,7 +73,7 @@ function addfriend(name, senderid, rcvrid, picurl, time, msg) {
   })
 
 }
-
+//take all firend of current user from friendchat
 function frchats(userid) {
   const q = query(collection(database, "friendchat"), where("parentid", "==", userid));
   getDocs(q)
@@ -151,7 +151,7 @@ onAuthStateChanged(auth, (user) => {
     window.location.href = "login.html";
   }
 
-
+//update changes of last message using onsnapshot
   const q = query(collection(database, "chats"), where("senderid", "==", user.uid));
   const unsubscribe = onSnapshot(q, (snapshot) => {
     // console.log(sid);
@@ -185,7 +185,7 @@ onAuthStateChanged(auth, (user) => {
   });
 
 });
-
+//search button in chat funtionality
 const inp = document.querySelector("#search_user");
 inp.addEventListener("keyup", (e) => {
   let filter = e.target.value.toUpperCase();
